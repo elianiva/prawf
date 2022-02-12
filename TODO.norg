@@ -1,0 +1,18 @@
+@document.meta
+  title: Prawf Todo List
+  description:
+  authors: elianiva
+  created: 2022-02-12
+@end
+
+* TODO LIST
+  - [ ] Use @fontsource instead of embeeding @import in css file
+  - [ ] Figure out scoring system
+  - [ ] Figure out how to make the animation
+  - [ ] Create countdown animation
+  - [ ] Figure out how to make the interval faster (like, how fast should it be)
+  - [ ] Generate numbers for the test (should we populate it first? should we generate it every click event?)
+  - [ ] Create the backend to store the score (probably gonna use restana and sqlite for the db)
+  - [ ] Create homepage
+  - [ ] Create leaderboard page
+  - [ ] Figure out routing system
