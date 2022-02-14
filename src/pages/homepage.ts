@@ -42,8 +42,10 @@ export default class Homepage extends HTMLElement {
   private _attachEventListener() {
     const buttons = this._shadowRoot.getElementById("buttons");
 
-    this._clickEvent = fromEvent(buttons!, "click", (e) =>
-      (e.target as Element).closest("button")
+    this._clickEvent = fromEvent(
+      buttons!,
+      "click",
+      (e) => e.target as HTMLButtonElement
     ).subscribe((button) => {
       if (button === null) return;
 

@@ -25,7 +25,7 @@
 .duration-item {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   color: var(--light-grey);
   cursor: pointer;
   border: none;
@@ -35,6 +35,6 @@
 }
 
 .duration-item.active {
-  font-weight: 500;
+  font-weight: 600;
   color: var(--black);
 }

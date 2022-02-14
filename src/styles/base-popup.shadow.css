@@ -17,7 +17,6 @@
   min-width: 600px;
   max-width: 800px;
   border-radius: 0.5rem;
-  transition: all 0.5s ease;
   z-index: 15;
 }
 
@@ -35,6 +34,7 @@
   color: var(--black);
   line-height: 1.5em;
   font-size: 1.125rem;
+  margin: 1.5rem 0;
 }
 
 .footer {
@@ -42,7 +42,6 @@
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
-  margin-top: 2rem;
 }
 
 .primary-button {

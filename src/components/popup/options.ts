@@ -30,7 +30,7 @@ export default class OptionsPopup extends HTMLElement {
         ${baseStyles}
         ${styles}
 
-        :host, .content {
+        :host {
           visibility: ${this._isVisible ? "visible" : "hidden"};
           opacity: ${this._isVisible ? "1" : "0"};
           transform: ${this._isVisible ? "translateY(0)" : "translateY(-2rem)"};
@@ -76,8 +76,10 @@ export default class OptionsPopup extends HTMLElement {
   private _attachEventListener() {
     const content = this._shadowRoot.getElementById("content");
 
-    this._clickEvent = fromEvent(content!, "click", (e) =>
-      (e.target as Element).closest("button")
+    this._clickEvent = fromEvent(
+      content!,
+      "click",
+      (e) => e.target as HTMLButtonElement
     ).subscribe((button) => {
       if (button === null) return;
 
@@ -89,7 +91,6 @@ export default class OptionsPopup extends HTMLElement {
           optionsPopupVisibility.next(false);
           break;
         case button.id.startsWith("duration-"):
-          console.log(button);
           this._chosenDuration = parseInt(button.id.split("-")[1]);
           break;
         default: /* noop */
