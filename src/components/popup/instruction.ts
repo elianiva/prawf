@@ -3,6 +3,7 @@ import {
   instructionPopupVisibility,
   optionsPopupVisibility
 } from "@/store/popup";
+import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/instruction-popup.shadow.css?inline";
 
 export default class InstructionPopup extends HTMLElement {
@@ -29,9 +30,10 @@ export default class InstructionPopup extends HTMLElement {
     const wrapper = document.createElement("template");
     wrapper.innerHTML = `
       <style>
+        ${baseStyles}
         ${styles}
 
-        :host {
+        :host, .content {
           visibility: ${this._isVisible ? "visible" : "hidden"};
           opacity: ${this._isVisible ? "1" : "0"};
           transform: ${this._isVisible ? "translateY(0)" : "translateY(-2rem)"};

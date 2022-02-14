@@ -1,11 +1,14 @@
 import { fromEvent, Subscription } from "rxjs";
 import { optionsPopupVisibility } from "@/store/popup";
+import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/options-popup.shadow.css?inline";
 
 export default class OptionsPopup extends HTMLElement {
   private _shadowRoot: ShadowRoot;
   private _clickEvent: Subscription | null = null;
   private _isVisible: boolean = false;
+  private _durations: number[] = [10, 15, 30, 60, 120];
+  private _chosenDuration: number = 0;
 
   constructor() {
     super();
@@ -24,9 +27,10 @@ export default class OptionsPopup extends HTMLElement {
     const wrapper = document.createElement("template");
     wrapper.innerHTML = `
       <style>
+        ${baseStyles}
         ${styles}
 
-        :host {
+        :host, .content {
           visibility: ${this._isVisible ? "visible" : "hidden"};
           opacity: ${this._isVisible ? "1" : "0"};
           transform: ${this._isVisible ? "translateY(0)" : "translateY(-2rem)"};
@@ -36,7 +40,26 @@ export default class OptionsPopup extends HTMLElement {
         <button class="close-button" id="close">&times;</button>
         <h1 class="title">Test Options</h1>
         <div class="body">
-          <h1>BRUH</h1>
+          <div class="options">
+            <label class="option-item">
+              <span class="option-label">Duration</span>
+              <div class="durations">
+                ${this._durations
+                  .map(
+                    (duration, idx) =>
+                      `<button
+                        class="duration-item ${
+                          this._chosenDuration === idx ? "active" : ""
+                        }"
+                        id=${"duration-" + idx}
+                      >
+                        ${duration}m
+                      </button>`
+                  )
+                  .join("")}
+              </div>
+            </label>
+          </div>
         </div>
         <div class="footer" id="footer">
           <button id="start" class="primary-button">
@@ -58,12 +81,16 @@ export default class OptionsPopup extends HTMLElement {
     ).subscribe((button) => {
       if (button === null) return;
 
-      switch (button.id) {
-        case "start":
+      switch (true) {
+        case button.id === "start":
           optionsPopupVisibility.next(true);
           break;
-        case "close":
+        case button.id === "close":
           optionsPopupVisibility.next(false);
+          break;
+        case button.id.startsWith("duration-"):
+          console.log(button);
+          this._chosenDuration = parseInt(button.id.split("-")[1]);
           break;
         default: /* noop */
       }
