@@ -2,6 +2,7 @@ import { fromEvent, Subscription } from "rxjs";
 import { optionsPopupVisibility$ } from "@/store/popup";
 import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/options-popup.shadow.css?inline";
+import { currentRoute$ } from "@/store/route";
 
 export default class OptionsPopup extends HTMLElement {
   private _shadowRoot: ShadowRoot;
@@ -85,7 +86,8 @@ export default class OptionsPopup extends HTMLElement {
 
       switch (true) {
         case button.id === "start":
-          optionsPopupVisibility$.next(true);
+          optionsPopupVisibility$.next(false);
+          currentRoute$.next("/play");
           break;
         case button.id === "close":
           optionsPopupVisibility$.next(false);
