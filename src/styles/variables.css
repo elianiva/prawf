@@ -1,0 +1,13 @@
+:root {
+  --white: #ffffff;
+  --dimmed-white: #f8fafc;
+  --dark-dimmed-white: #e2e8f0;
+  --black: #1e293b;
+  --grey: #334155;
+  --lighter-grey: #f1f5f9;
+  --light-grey: #cbd5e1;
+  --dark-sky: #0284c7;
+
+  --font-heading: "Kanit", sans-serif;
+  --font-body: "Martel Sans", sans-serif;
+}

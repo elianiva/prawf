@@ -1,0 +1,111 @@
+:host {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 0 2rem;
+  transition: all 0.2s ease;
+}
+
+.content {
+  position: relative;
+  background-color: var(--white);
+  padding: 1.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.08);
+  min-width: 600px;
+  max-width: 800px;
+  border-radius: 0.5rem;
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  margin: 0;
+  color: var(--black);
+}
+
+.body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  margin: 0;
+  color: var(--black);
+  line-height: 1.5em;
+  font-size: 1.125rem;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+p {
+  line-height: 1.625em;
+}
+
+a {
+  color: var(--dark-sky);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+code {
+  background-color: var(--lighter-grey);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.125rem;
+}
+
+.primary-button,
+.secondary-button {
+  font-family: var(--font-heading);
+  border: none;
+  outline: none;
+  padding: 0.25rem 1rem;
+  font-size: 1.25rem;
+  font-weight: 500;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.primary-button {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+.secondary-button {
+  background-color: var(--light-grey);
+  color: var(--grey);
+}
+
+.primary-button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 0.125rem var(--dimmed-white),
+              0 0 0 0.25rem var(--black);
+}
+
+.secondary-button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 0.125rem var(--dimmed-white),
+              0 0 0 0.25rem var(--light-grey);
+}
+
+
+.close-button {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  background: none;
+  color: var(--light-grey);
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: var(--black);
+}

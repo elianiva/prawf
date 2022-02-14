@@ -8,11 +8,19 @@
 * TODO LIST
   - [ ] Use @fontsource instead of embeeding @import in css file
   - [ ] Figure out scoring system
+    - [x] Concept
+    - [ ] Calculate consistency
+    - [ ] Calculate accuracy
   - [ ] Figure out how to make the animation
-  - [ ] Create countdown animation
+  - [ ] Create countdown animation (it's like a reverse loading bar)
+  - [ ] Show time left
   - [ ] Figure out how to make the interval faster (like, how fast should it be)
   - [ ] Generate numbers for the test (should we populate it first? should we generate it every click event?)
   - [ ] Create the backend to store the score (probably gonna use restana and sqlite for the db)
-  - [ ] Create homepage
+  - [x] Create homepage
   - [ ] Create leaderboard page
   - [ ] Figure out routing system
+  - [ ] Add dialog to choose time limit
+    - [x] Popup functionality
+    - [ ] Options chooser / dropdown
+  - [ ] Add funfact-like page (result) with a fancy chart
