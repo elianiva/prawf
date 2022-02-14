@@ -167,4 +167,8 @@ export default class InstructionPopup extends HTMLElement {
     if (!this.isConnected) return;
     this._render();
   }
+
+  public disconnectedCallback() {
+    this._clickEvent?.unsubscribe();
+  }
 }

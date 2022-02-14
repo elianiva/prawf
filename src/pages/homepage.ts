@@ -59,4 +59,8 @@ export default class Homepage extends HTMLElement {
     if (!this.isConnected) return;
     this._render();
   }
+
+  public disconnectedCallback() {
+    this._clickEvent?.unsubscribe();
+  }
 }
