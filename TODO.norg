@@ -11,11 +11,11 @@
     - [x] Concept
     - [ ] Calculate consistency
     - [ ] Calculate accuracy
-  - [ ] Figure out how to make the animation
-  - [ ] Create countdown animation (it's like a reverse loading bar)
-  - [ ] Show time left
-  - [ ] Figure out how to make the interval faster (like, how fast should it be)
-  - [ ] Generate numbers for the test (should we populate it first? should we generate it every click event?)
+  - [x] Figure out how to make the animation
+  - [x] Create countdown animation (it's like a reverse loading bar)
+  - [x] Show time left
+  - [_] Figure out how to make the interval faster (like, how fast should it be)
+  - [x] Generate numbers for the test (should we populate it first? should we generate it every click event?)
   - [ ] Create the backend to store the score (probably gonna use restana and sqlite for the db)
   - [x] Create homepage
   - [ ] Create leaderboard page

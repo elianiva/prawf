@@ -1,6 +1,6 @@
 // TODO(elianiva): might add logic for endless test until user pressed end
 //                 button
-export const DURATION = [1, 10, 15, 30, 60, 120] as const;
+export const DURATION = [10, 15, 30, 60, 120] as const;
 
 export type ValidDuration = typeof DURATION[number];
 
