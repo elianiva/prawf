@@ -1,11 +1,11 @@
 import { fromEvent, Subscription } from "rxjs";
-import { optionsPopupVisibility } from "@/store/popup";
+import { optionsPopupVisibility$ } from "@/store/popup";
 import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/options-popup.shadow.css?inline";
 
 export default class OptionsPopup extends HTMLElement {
   private _shadowRoot: ShadowRoot;
-  private _clickEvent: Subscription | null = null;
+  private _clickEvent$: Subscription | null = null;
   private _isVisible: boolean = false;
   private _durations: number[] = [10, 15, 30, 60, 120];
   private _chosenDuration: number = 0;
@@ -13,7 +13,7 @@ export default class OptionsPopup extends HTMLElement {
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
-    optionsPopupVisibility.subscribe((visible) => {
+    optionsPopupVisibility$.subscribe((visible) => {
       this._isVisible = visible;
       this._render();
     });
@@ -21,7 +21,7 @@ export default class OptionsPopup extends HTMLElement {
 
   private _render() {
     // clean previous content and remove previous event listener
-    this._clickEvent?.unsubscribe();
+    this._clickEvent$?.unsubscribe();
     this._shadowRoot.innerHTML = "";
 
     const wrapper = document.createElement("template");
@@ -76,7 +76,7 @@ export default class OptionsPopup extends HTMLElement {
   private _attachEventListener() {
     const content = this._shadowRoot.getElementById("content");
 
-    this._clickEvent = fromEvent(
+    this._clickEvent$ = fromEvent(
       content!,
       "click",
       (e) => e.target as HTMLButtonElement
@@ -85,10 +85,10 @@ export default class OptionsPopup extends HTMLElement {
 
       switch (true) {
         case button.id === "start":
-          optionsPopupVisibility.next(true);
+          optionsPopupVisibility$.next(true);
           break;
         case button.id === "close":
-          optionsPopupVisibility.next(false);
+          optionsPopupVisibility$.next(false);
           break;
         case button.id.startsWith("duration-"):
           this._chosenDuration = parseInt(button.id.split("-")[1]);
@@ -109,6 +109,6 @@ export default class OptionsPopup extends HTMLElement {
   }
 
   public disconnectedCallback() {
-    this._clickEvent?.unsubscribe();
+    this._clickEvent$?.unsubscribe();
   }
 }

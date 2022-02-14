@@ -1,10 +1,10 @@
 import { fromEvent, Subscription } from "rxjs";
-import { instructionPopupVisibility } from "@/store/popup";
+import { instructionPopupVisibility$ } from "@/store/popup";
 import styles from "@/styles/homepage.shadow.css?inline";
 
 export default class Homepage extends HTMLElement {
   private _shadowRoot: ShadowRoot;
-  private _clickEvent: Subscription | null = null;
+  private _clickEvent$: Subscription | null = null;
 
   constructor() {
     super();
@@ -13,7 +13,7 @@ export default class Homepage extends HTMLElement {
 
   private _render() {
     // clean previous content and remove previous event listener
-    this._clickEvent?.unsubscribe();
+    this._clickEvent$?.unsubscribe();
     this._shadowRoot.innerHTML = "";
 
     const wrapper = document.createElement("template");
@@ -42,7 +42,7 @@ export default class Homepage extends HTMLElement {
   private _attachEventListener() {
     const buttons = this._shadowRoot.getElementById("buttons");
 
-    this._clickEvent = fromEvent(
+    this._clickEvent$ = fromEvent(
       buttons!,
       "click",
       (e) => e.target as HTMLButtonElement
@@ -50,7 +50,7 @@ export default class Homepage extends HTMLElement {
       if (button === null) return;
 
       if (button.id === "start-button") {
-        instructionPopupVisibility.next(true);
+        instructionPopupVisibility$.next(true);
       }
     });
   }
@@ -61,6 +61,6 @@ export default class Homepage extends HTMLElement {
   }
 
   public disconnectedCallback() {
-    this._clickEvent?.unsubscribe();
+    this._clickEvent$?.unsubscribe();
   }
 }

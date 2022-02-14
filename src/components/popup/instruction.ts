@@ -1,7 +1,7 @@
 import { fromEvent, Subscription } from "rxjs";
 import {
-  instructionPopupVisibility,
-  optionsPopupVisibility
+  instructionPopupVisibility$,
+  optionsPopupVisibility$
 } from "@/store/popup";
 import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/instruction-popup.shadow.css?inline";
@@ -9,13 +9,13 @@ import styles from "@/styles/instruction-popup.shadow.css?inline";
 export default class InstructionPopup extends HTMLElement {
   private _shadowRoot: ShadowRoot;
   private _pageNumber: number = 1;
-  private _clickEvent: Subscription | null = null;
+  private _clickEvent$: Subscription | null = null;
   private _isVisible: boolean = false;
 
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
-    instructionPopupVisibility.subscribe((visible) => {
+    instructionPopupVisibility$.subscribe((visible) => {
       if (!visible) this._pageNumber = 1;
       this._isVisible = visible;
       this._render();
@@ -24,7 +24,7 @@ export default class InstructionPopup extends HTMLElement {
 
   private _render() {
     // clean previous content and remove previous event listener
-    this._clickEvent?.unsubscribe();
+    this._clickEvent$?.unsubscribe();
     this._shadowRoot.innerHTML = "";
 
     const wrapper = document.createElement("template");
@@ -130,7 +130,7 @@ export default class InstructionPopup extends HTMLElement {
   private _attachEventListener() {
     const content = this._shadowRoot.getElementById("content");
 
-    this._clickEvent = fromEvent(
+    this._clickEvent$ = fromEvent(
       content!,
       "click",
       (e) => e.target as HTMLButtonElement
@@ -140,8 +140,8 @@ export default class InstructionPopup extends HTMLElement {
       switch (button.id) {
         case "next":
           if (this._pageNumber >= 2) {
-            instructionPopupVisibility.next(false);
-            optionsPopupVisibility.next(true);
+            instructionPopupVisibility$.next(false);
+            optionsPopupVisibility$.next(true);
             return;
           }
           this._pageNumber++;
@@ -151,7 +151,7 @@ export default class InstructionPopup extends HTMLElement {
           this._pageNumber--;
           break;
         case "close":
-          instructionPopupVisibility.next(false);
+          instructionPopupVisibility$.next(false);
           break;
         default: /* noop */
       }
@@ -169,6 +169,6 @@ export default class InstructionPopup extends HTMLElement {
   }
 
   public disconnectedCallback() {
-    this._clickEvent?.unsubscribe();
+    this._clickEvent$?.unsubscribe();
   }
 }
