@@ -3,13 +3,12 @@ import { optionsPopupVisibility$ } from "@/store/popup";
 import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/options-popup.shadow.css?inline";
 import { currentRoute$ } from "@/store/route";
+import { chosenDuration, DURATION, setChosenDuration } from "@/store/gameState";
 
 export default class OptionsPopup extends HTMLElement {
   private _shadowRoot: ShadowRoot;
   private _clickEvent$: Subscription | null = null;
   private _isVisible: boolean = false;
-  private _durations: number[] = [10, 15, 30, 60, 120];
-  private _chosenDuration: number = 0;
 
   constructor() {
     super();
@@ -45,19 +44,17 @@ export default class OptionsPopup extends HTMLElement {
             <label class="option-item">
               <span class="option-label">Duration</span>
               <div class="durations">
-                ${this._durations
-                  .map(
-                    (duration, idx) =>
-                      `<button
+                ${DURATION.map(
+                  (duration, idx) =>
+                    `<button
                         class="duration-item ${
-                          this._chosenDuration === idx ? "active" : ""
+                          chosenDuration === duration ? "active" : ""
                         }"
                         id=${"duration-" + idx}
                       >
                         ${duration}m
                       </button>`
-                  )
-                  .join("")}
+                ).join("")}
               </div>
             </label>
           </div>
@@ -93,7 +90,8 @@ export default class OptionsPopup extends HTMLElement {
           optionsPopupVisibility$.next(false);
           break;
         case button.id.startsWith("duration-"):
-          this._chosenDuration = parseInt(button.id.split("-")[1]);
+          const durationIdx = parseInt(button.id.split("-")[1]);
+          setChosenDuration(DURATION[durationIdx]);
           break;
         default: /* noop */
       }

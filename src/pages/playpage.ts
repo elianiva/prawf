@@ -1,5 +1,4 @@
-import { fromEvent, Subscription } from "rxjs";
-import { instructionPopupVisibility$ } from "@/store/popup";
+import { Subscription } from "rxjs";
 import styles from "@/styles/homepage.shadow.css?inline";
 
 export default class Playpage extends HTMLElement {
@@ -21,6 +20,8 @@ export default class Playpage extends HTMLElement {
       <style>
         ${styles}
       </style>
+      <p-countdown-bar></p-countdown-bar>
+      <p-countdown-timer></p-countdown-timer>
       <div class="container">
         <h1 class="title">PLAY</h1>
       </div>
@@ -31,19 +32,6 @@ export default class Playpage extends HTMLElement {
   }
 
   private _attachEventListener() {
-    const buttons = this._shadowRoot.getElementById("buttons");
-
-    this._clickEvent$ = fromEvent(
-      buttons!,
-      "click",
-      (e) => e.target as HTMLButtonElement
-    ).subscribe((button) => {
-      if (button === null) return;
-
-      if (button.id === "start-button") {
-        instructionPopupVisibility$.next(true);
-      }
-    });
   }
 
   public connectedCallback() {
