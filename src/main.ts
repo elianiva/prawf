@@ -10,6 +10,7 @@ import CountdownBar from "@/components/countdown/bar";
 import SidebarContainer from "@/components/sidebar/container";
 import History from "@/components/sidebar/history";
 import Timer from "@/components/countdown/timer";
+import Chart from "@/components/chart/chart";
 import { currentRoute$, Route } from "@/store/route";
 
 customElements.define("p-homepage", Homepage);
@@ -22,6 +23,7 @@ customElements.define("p-countdown-bar", CountdownBar);
 customElements.define("p-countdown-timer", Timer);
 customElements.define("p-sidebar", SidebarContainer);
 customElements.define("p-history", History);
+customElements.define("p-chart", Chart);
 
 const outlet = document.querySelector("p-outlet");
 const outletShadowRoot = outlet!.attachShadow({ mode: "open" });

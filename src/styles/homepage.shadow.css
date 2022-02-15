@@ -26,7 +26,7 @@
   font-family: var(--font-body);
   font-size: 2rem;
   font-weight: 400;
-  color: var(--grey);
+  color: var(--dark-grey);
 }
 
 .buttons {

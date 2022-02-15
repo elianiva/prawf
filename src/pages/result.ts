@@ -1,9 +1,13 @@
 import { GameHistory, gameHistory } from "@/store/gameState";
-import styles from "@/styles/homepage.shadow.css?inline";
+import { resultsByRound$ } from "@/store/result";
+import styles from "@/styles/result.shadow.css?inline";
 import { groupBy, map, mergeMap, of, reduce } from "rxjs";
 
 export default class ResultPage extends HTMLElement {
   private _shadowRoot: ShadowRoot;
+  private _correct: number = 0;
+  private _incorrect: number = 0;
+  private _averageRatio: number = 0;
 
   constructor() {
     super();
@@ -21,17 +25,53 @@ export default class ResultPage extends HTMLElement {
       </style>
       <div class="container">
         <h1 class="title">Your Test Result</h1>
+        <div class="result-box">
+          <div class="result-item">
+            <span class="result-label">Correct</span>
+            <span class="result-value">${this._correct}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Incorrect</span>
+            <span class="result-value">${this._incorrect}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Ratio</span>
+            <span class="result-value">${this._averageRatio * 100}%</span>
+          </div>
+        </div>
+        <div class="chart-box">
+          <span class="chart-label">Progression Overtime</span>
+          <p-chart></p-chart>
+        </div>
       </div>
     `;
 
     this._shadowRoot.appendChild(wrapper.content.cloneNode(true));
   }
 
+  private _mapToResult({
+    roundResult,
+    round
+  }: {
+    roundResult: GameHistory[];
+    round: number;
+  }) {
+    const correct = roundResult.filter(
+      ({ questionNumber: [a, b], answer }) => (a + b) % 10 === answer
+    ).length;
+    const incorrect = roundResult.length - correct;
+
+    return {
+      correct: correct,
+      incorrect: incorrect,
+      correctRatio: parseFloat((correct / (correct + incorrect)).toFixed(2)),
+      round
+    };
+  }
+
   public connectedCallback() {
     if (!this.isConnected) return;
-    this._render();
 
-    const resultsByRound: Record<number, any> = {};
     of(...gameHistory)
       .pipe(
         groupBy((x) => x.round),
@@ -40,21 +80,25 @@ export default class ResultPage extends HTMLElement {
             reduce((acc, curr) => [...acc, curr], [] as GameHistory[])
           )
         ),
-        map((roundResult) => ({ roundResult, idx: roundResult[0].round }))
+        map((roundResult) => ({ roundResult, round: roundResult[0].round })),
+        map(this._mapToResult)
       )
-      .subscribe(({ roundResult, idx }) => {
-        const correct = roundResult.filter(
-          ({ questionNumber: [a, b], answer }) => (a + b) % 10 === answer
-        ).length;
-        const incorrect = roundResult.length - correct;
-
-        resultsByRound[idx] = {
-          correct: correct,
-          incorrect: incorrect,
-          correctRatio: parseFloat((correct / roundResult.length).toFixed(2))
-        };
+      .subscribe(({ correct, incorrect, correctRatio, round }) => {
+        this._correct += correct;
+        this._incorrect += incorrect;
+        resultsByRound$.next({
+          round,
+          result: {
+            correct: correct,
+            incorrect: incorrect,
+            correctRatio: correctRatio
+          }
+        });
       });
+    this._averageRatio = parseFloat(
+      (this._correct / (this._correct + this._incorrect)).toFixed(2)
+    );
 
-    console.log(resultsByRound);
+    this._render();
   }
 }
