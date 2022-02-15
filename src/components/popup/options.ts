@@ -3,7 +3,7 @@ import { optionsPopupVisibility$ } from "@/store/popup";
 import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/options-popup.shadow.css?inline";
 import { currentRoute$ } from "@/store/route";
-import { chosenDuration, DURATION, setChosenDuration } from "@/store/gameState";
+import { chosenDuration, chosenDuration$, DURATION } from "@/store/gameState";
 
 export default class OptionsPopup extends HTMLElement {
   private _shadowRoot: ShadowRoot;
@@ -91,7 +91,7 @@ export default class OptionsPopup extends HTMLElement {
           break;
         case button.id.startsWith("duration-"):
           const durationIdx = parseInt(button.id.split("-")[1]);
-          setChosenDuration(DURATION[durationIdx]);
+          chosenDuration$.next(DURATION[durationIdx]);
           break;
         default: /* noop */
       }

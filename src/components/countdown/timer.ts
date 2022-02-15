@@ -51,7 +51,7 @@ export default class Timer extends HTMLElement {
 
     const finish$ = timer(chosenDuration * 60 * 1000);
     finish$.subscribe(() => {
-      currentRoute$.next("/funfact");
+      currentRoute$.next("/result");
     });
 
     timer(0, 1000)

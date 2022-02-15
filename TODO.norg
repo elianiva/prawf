@@ -11,6 +11,7 @@
     - [x] Concept
     - [ ] Calculate consistency
     - [ ] Calculate accuracy
+    - [x] Calculate correct answers
   - [x] Figure out how to make the animation
   - [x] Create countdown animation (it's like a reverse loading bar)
   - [x] Show time left

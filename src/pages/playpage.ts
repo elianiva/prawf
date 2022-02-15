@@ -1,7 +1,12 @@
-import { gameHistory$ } from "@/store/gameState";
+import {
+  chosenDuration,
+  currentRound,
+  currentRound$,
+  gameHistory$
+} from "@/store/gameState";
 import styles from "@/styles/playpage.shadow.css?inline";
 import { randomNumber } from "@/utils/randomNumber";
-import { filter, fromEvent, map, Subscription, timer } from "rxjs";
+import { filter, fromEvent, interval, map, Subscription, timer } from "rxjs";
 
 export default class Playpage extends HTMLElement {
   private _shadowRoot: ShadowRoot;
@@ -101,7 +106,8 @@ export default class Playpage extends HTMLElement {
     gameHistory$.next({
       answer,
       questionNumber: this._numbers,
-      durationMs: now - this._lastAnswered
+      durationMs: now - this._lastAnswered,
+      round: currentRound
     });
     this._lastAnswered = now;
 
@@ -134,6 +140,11 @@ export default class Playpage extends HTMLElement {
   public connectedCallback() {
     if (!this.isConnected) return;
     this._render();
+
+    interval(((chosenDuration * 60) / 10) * 1000).subscribe(() => {
+      currentRound$.next(currentRound + 1);
+      console.log(currentRound);
+    });
   }
 
   public disconnectedCallback() {
