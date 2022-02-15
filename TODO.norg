@@ -25,3 +25,4 @@
     - [x] Popup functionality
     - [x] Options chooser / dropdown
   - [ ] Add funfact-like page (result) with a fancy chart
+  - [ ] Might want to rename fooEvent to fooSubscription since it's a subscription instead of a stream

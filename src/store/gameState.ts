@@ -8,3 +8,5 @@ export let chosenDuration: ValidDuration = DURATION[0];
 export function setChosenDuration(duration: ValidDuration) {
   chosenDuration = duration;
 }
+
+export const history = [];

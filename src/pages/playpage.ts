@@ -1,10 +1,13 @@
 import styles from "@/styles/playpage.shadow.css?inline";
 import { randomNumber } from "@/utils/randomNumber";
-import { fromEvent, map, timer } from "rxjs";
+import { filter, fromEvent, map, Subscription, timer } from "rxjs";
 
 export default class Playpage extends HTMLElement {
   private _shadowRoot: ShadowRoot;
   private _numbers: number[] = [9, 7, 4];
+  private _numpadEvent$: Subscription | null = null;
+  private _keyboardEvent$: Subscription | null = null;
+  private _questionBox: HTMLDivElement | null = null;
 
   constructor() {
     super();
@@ -13,6 +16,8 @@ export default class Playpage extends HTMLElement {
 
   private _render() {
     // clean previous content and remove previous event listener
+    this._numpadEvent$?.unsubscribe();
+    this._keyboardEvent$?.unsubscribe();
     this._shadowRoot.innerHTML = "";
 
     const wrapper = document.createElement("template");
@@ -40,51 +45,79 @@ export default class Playpage extends HTMLElement {
     `;
 
     this._shadowRoot.appendChild(wrapper.content.cloneNode(true));
+    this._questionBox = this._shadowRoot.getElementById(
+      "question"
+    ) as HTMLDivElement | null;
     this._attachEventListener();
   }
 
   private _attachEventListener() {
     const numpad = this._shadowRoot.getElementById("numpad");
-    const question = this._shadowRoot.getElementById("question");
 
-    fromEvent(numpad!, "click", (e) => e.target as HTMLButtonElement)
+    this._numpadEvent$ = fromEvent(
+      numpad!,
+      "click",
+      (e) => e.target as HTMLButtonElement
+    )
       .pipe(
+        filter(
+          (button) => button.tagName === "BUTTON" && button.innerText !== ""
+        ),
         map(this._mapToAnswer),
-        map((answer) => ({
-          answer,
-          numbers: [...this._numbers.slice(1), randomNumber(1, 9)]
-        }))
+        map(this._withNumbers.bind(this))
       )
-      .subscribe(({ answer, numbers }) => {
-        if (answer === null || numbers === null) return;
+      .subscribe(this._answerQuestion.bind(this));
 
-        question!.style.transition = "transform 0.2s ease-out";
-        question!.style.transform = "translateY(-5rem)";
+    this._keyboardEvent$ = fromEvent(document, "keydown")
+      .pipe(
+        filter((e) => /^[0-9]$/.test((e as KeyboardEvent).key)),
+        map((e) => parseInt((e as KeyboardEvent).key)),
+        map(this._withNumbers.bind(this))
+      )
+      .subscribe(this._answerQuestion.bind(this));
+  }
 
-        this._numbers = numbers;
+  private _answerQuestion({
+    answer,
+    numbers
+  }: {
+    answer: number;
+    numbers: number[];
+  }) {
+    console.log(answer, numbers);
 
-        timer(200).subscribe(() => {
-          question!.style.transition = "none";
-          question!.style.transform = "translateY(6rem)";
-          question!.innerHTML = this._numbers
-            .map((number) => `<span class="question-item">${number}</span>`)
-            .join("");
-        });
-      });
+    this._questionBox!.style.transition = "transform 0.2s ease-out";
+    this._questionBox!.style.transform = "translateY(-5rem)";
+
+    this._numbers = numbers;
+
+    timer(200).subscribe(() => {
+      this._questionBox!.style.transition = "none";
+      this._questionBox!.style.transform = "translateY(6rem)";
+      this._questionBox!.innerHTML = this._numbers
+        .map((number) => `<span class="question-item">${number}</span>`)
+        .join("");
+    });
   }
 
   private _mapToAnswer(button: HTMLButtonElement) {
-    if (
-      button.tagName !== "BUTTON" ||
-      (button.tagName === "BUTTON" && button.innerText === "")
-    ) {
-      return null;
-    }
     return parseInt(button.innerText);
+  }
+
+  private _withNumbers(answer: number) {
+    return {
+      answer,
+      numbers: [...this._numbers.slice(1), randomNumber(1, 9)]
+    };
   }
 
   public connectedCallback() {
     if (!this.isConnected) return;
     this._render();
+  }
+
+  public disconnectedCallback() {
+    this._numpadEvent$?.unsubscribe();
+    this._keyboardEvent$?.unsubscribe();
   }
 }
