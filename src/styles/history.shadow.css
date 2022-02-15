@@ -19,7 +19,6 @@
   grid-template-columns: 1rem 2fr 1rem 1rem 2fr;
   font-family: var(--font-heading);
   font-size: 1.25rem;
-  border-bottom: 0.125rem var(--lightest-grey) solid;
   padding: 0 1rem 1rem;
   border-radius: 0.25rem;
   color: var(--black);
@@ -27,7 +26,7 @@
 
 /* we use 2 because nth-child(1) is the <style> tag */
 .item:not(:nth-child(2)) {
-  filter: opacity(0.5);
+  filter: opacity(0.25);
 }
 
 .item-duration {
