@@ -7,7 +7,7 @@
   width: 100%;
   padding: 1rem 0;
   overflow-y: auto;
-  max-height: inherit;
+  max-height: calc(100% - 6rem);
 }
 
 :host::-webkit-scrollbar {

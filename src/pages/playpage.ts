@@ -5,7 +5,11 @@ import { filter, fromEvent, map, Subscription, timer } from "rxjs";
 
 export default class Playpage extends HTMLElement {
   private _shadowRoot: ShadowRoot;
-  private _numbers: number[] = [9, 7, 4];
+  private _numbers: [number, number, number] = [
+    randomNumber(1, 9),
+    randomNumber(1, 9),
+    randomNumber(1, 9)
+  ];
   private _numpadEvent$: Subscription | null = null;
   private _keyboardEvent$: Subscription | null = null;
   private _questionBox: HTMLDivElement | null = null;
@@ -40,7 +44,11 @@ export default class Playpage extends HTMLElement {
         </div>
         <div class="numpad" id="numpad">
           ${[1, 2, 3, 4, 5, 6, 7, 8, 9, "", 0, ""]
-            .map((n) => `<button class="numpad-button">${n}</button>`)
+            .map((n) =>
+              n === ""
+                ? "<div></div>"
+                : `<button class="numpad-button">${n}</button>`
+            )
             .join("")}
         </div>
       </div>
@@ -92,7 +100,7 @@ export default class Playpage extends HTMLElement {
     const now = Date.now();
     gameHistory$.next({
       answer,
-      questionNumber: numbers,
+      questionNumber: this._numbers,
       durationMs: now - this._lastAnswered
     });
     this._lastAnswered = now;
