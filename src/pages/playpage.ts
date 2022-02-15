@@ -89,11 +89,13 @@ export default class Playpage extends HTMLElement {
     this._questionBox!.style.transition = "transform 0.2s ease-out";
     this._questionBox!.style.transform = "translateY(-5rem)";
 
+    const now = Date.now();
     gameHistory$.next({
       answer,
       questionNumber: numbers,
-      durationMs: Date.now() - this._lastAnswered
+      durationMs: now - this._lastAnswered
     });
+    this._lastAnswered = now;
 
     this._numbers = numbers;
 

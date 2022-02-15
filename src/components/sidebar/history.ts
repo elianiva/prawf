@@ -27,13 +27,16 @@ export default class History extends HTMLElement {
       <style>
         ${styles}
       </style>
-      ${gameHistory
-        .slice()
-        .reverse()
-        .map(({ answer, durationMs, questionNumber }) => {
-          const [firstNumber, secondNumber] = questionNumber;
-          const isCorrect = answer === (firstNumber + secondNumber) % 10;
-          return `
+      ${
+        gameHistory.length === 0
+          ? '<span class="history-message">Your answer history will appear here</span>'
+          : gameHistory
+              .slice()
+              .reverse()
+              .map(({ answer, durationMs, questionNumber }) => {
+                const [firstNumber, secondNumber] = questionNumber;
+                const isCorrect = answer === (firstNumber + secondNumber) % 10;
+                return `
             <div class="item">
               <div class="item-icon ${isCorrect ? "green" : "red"}">
                 ${isCorrect ? checkmarkIcon : crossIcon}
@@ -51,8 +54,9 @@ export default class History extends HTMLElement {
                 ${durationMs}
               </div>
             </div>`;
-        })
-        .join("")}
+              })
+              .join("")
+      }
     `;
 
     this._shadowRoot.appendChild(wrapper.content.cloneNode(true));

@@ -61,3 +61,11 @@
 .red {
   color: var(--red);
 }
+
+.history-message {
+  font-size: 1.25rem;
+  font-family: var(--font-body);
+  color: var(--light-grey);
+  padding: 1rem;
+  text-align: center;
+}
