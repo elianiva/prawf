@@ -15,7 +15,7 @@ export default class SidebarContainer extends HTMLElement {
       <style>
         :host {
           display: grid;
-          grid-template-rows: auto 1fr;
+          grid-template-rows: auto 3rem 1fr;
           padding: 1rem;
           border-radius: 0.25rem;
           background-color: var(--white);
@@ -29,24 +29,19 @@ export default class SidebarContainer extends HTMLElement {
           border-bottom: 0.125rem var(--lighter-grey) solid;
         }
 
-        .main-box {
-          position: relative;
+        .history-title {
           display: flex;
+          align-items: center;
           justify-content: center;
-          overflow-y: auto;
-          max-height: calc(100% - 3rem);
-        }
-
-        .main-box::-webkit-scrollbar {
-          display: none;
+          font-family: var(--font-heading);
+          font-size: 1.5rem;
         }
       </style>
       <div class="top-box">
         <p-countdown-timer></p-countdown-timer>
       </div>
-      <div class="main-box">
-        <p-history></p-history>
-      </div>
+      <span class="history-title">History</span>
+      <p-history></p-history>
     `;
 
     this._shadowRoot.appendChild(wrapper.content.cloneNode(true));

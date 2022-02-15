@@ -1,3 +1,4 @@
+import { gameHistory$ } from "@/store/gameState";
 import styles from "@/styles/playpage.shadow.css?inline";
 import { randomNumber } from "@/utils/randomNumber";
 import { filter, fromEvent, map, Subscription, timer } from "rxjs";
@@ -8,6 +9,7 @@ export default class Playpage extends HTMLElement {
   private _numpadEvent$: Subscription | null = null;
   private _keyboardEvent$: Subscription | null = null;
   private _questionBox: HTMLDivElement | null = null;
+  private _lastAnswered: number = Date.now();
 
   constructor() {
     super();
@@ -82,12 +84,16 @@ export default class Playpage extends HTMLElement {
     numbers
   }: {
     answer: number;
-    numbers: number[];
+    numbers: [number, number, number];
   }) {
-    console.log(answer, numbers);
-
     this._questionBox!.style.transition = "transform 0.2s ease-out";
     this._questionBox!.style.transform = "translateY(-5rem)";
+
+    gameHistory$.next({
+      answer,
+      questionNumber: numbers,
+      durationMs: Date.now() - this._lastAnswered
+    });
 
     this._numbers = numbers;
 
@@ -107,7 +113,11 @@ export default class Playpage extends HTMLElement {
   private _withNumbers(answer: number) {
     return {
       answer,
-      numbers: [...this._numbers.slice(1), randomNumber(1, 9)]
+      numbers: [...this._numbers.slice(1), randomNumber(1, 9)] as [
+        number,
+        number,
+        number
+      ]
     };
   }
 

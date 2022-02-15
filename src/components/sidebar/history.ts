@@ -1,4 +1,4 @@
-import { gameHistory } from "@/store/gameState";
+import { gameHistory, gameHistory$ } from "@/store/gameState";
 import styles from "@/styles/history.shadow.css?inline";
 import checkmarkIcon from "@/icons/checkmark.svg?raw";
 import crossIcon from "@/icons/cross.svg?raw";
@@ -9,6 +9,13 @@ export default class History extends HTMLElement {
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
+
+    gameHistory$.subscribe(() => {
+      this._render();
+      this.scrollTo({
+        top: 0
+      });
+    });
   }
 
   private _render() {
@@ -21,6 +28,8 @@ export default class History extends HTMLElement {
         ${styles}
       </style>
       ${gameHistory
+        .slice()
+        .reverse()
         .map(({ answer, durationMs, questionNumber }) => {
           const [firstNumber, secondNumber] = questionNumber;
           const isCorrect = answer === (firstNumber + secondNumber) % 10;
