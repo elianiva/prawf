@@ -21,7 +21,7 @@ export default class SidebarContainer extends HTMLElement {
           background-color: var(--white);
           border-right: 0.125rem var(--lighter-grey) solid;
           width: 100%;
-          max-height: 100vh;
+          max-height: calc(100vh - 2rem);
           z-index: 20;
         }
 
