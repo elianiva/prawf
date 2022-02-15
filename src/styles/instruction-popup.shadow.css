@@ -9,9 +9,9 @@ a {
 }
 
 code {
-  background-color: var(--lighter-grey);
-  padding: 0.125rem 0.25rem;
+  font-family: var(--font-body);
   border-radius: 0.125rem;
+  font-weight: 700;
 }
 
 .secondary-button {

@@ -43,7 +43,7 @@ export default class InstructionPopup extends HTMLElement {
         <button class="close-button" id="close">&times;</button>
         <h1 class="title">Instructions</h1>
         <div class="body">
-          <div style="display: ${this._pageNumber === 2 ? "none" : "block"}">
+          <div style="display: ${this._pageNumber === 1 ? "block" : "none"}">
             <p>
               <b>PRAWF</b> is a <b>Pauli Test</b> simulation. If you don't know
               what it is, it's a very common psychological test to measure your
@@ -62,21 +62,19 @@ export default class InstructionPopup extends HTMLElement {
             </p>
             <p>
               To calculate the result, what you need to do is sum the numbers,
-              <code>8 + 7</code> for example, and then modulo it by <code>10</code>:
-              <code>(8 + 7) % 10 = 5</code>
+              <code>8 + 7</code> for example, and then modulo it by <code>10</code>.
+              For example: <code>8 + 7 = 15 % 10 = 5</code>
               <br />
               Another way to think about it is you sum the numbers, we'll use
               <code>8 + 7</code> again, and only write the last digit. So, the result
               will be <code>5</code> since <code>8 + 7</code> is <code>15</code> and
-              the last digit is <code>5</code>.
-            </p>
-            <p>
-              Since this is a digital app, you will only be given 2 numbers at a
-              time. The numbers will cycle through after you have answered the
-              question.
+              its last digit is <code>5</code>.
+              <br />
+              If the result is only a single digit, <code>2 + 5 = 7</code> for example,
+              then the final result would be <code>7</code>.
             </p>
           </div>
-          <div style="display: ${this._pageNumber === 1 ? "none" : "block"}">
+          <div style="display: ${this._pageNumber === 2 ? "block" : "none"}">
             <p>
               The test will be divided into several rounds. Each round will be
               15 minutes each. It is necessary to divide this test into several
@@ -89,7 +87,14 @@ export default class InstructionPopup extends HTMLElement {
               how much time you have left.
             </p>
             <p>
-              The scoring system works this way:
+              Since this is a digital app, you will only be given 2 numbers at a
+              time. The numbers will cycle through after you have answered the
+              question.
+            </p>
+          </div>
+          <div style="display: ${this._pageNumber === 3 ? "block" : "none"}">
+            <p>
+              Here are some rules that you need to keep in mind:
             </p>
             <ul>
               <li>
@@ -106,6 +111,10 @@ export default class InstructionPopup extends HTMLElement {
               <li>
                 You can choose how long do you want to take the test. The
                 longer you do the test, the more accurate the result will be.
+              </li>
+              <li>
+                You can answer the question either by using the provided numpad
+                or use your keyboard.
               </li>
             </ul>
           </div>
@@ -139,7 +148,7 @@ export default class InstructionPopup extends HTMLElement {
 
       switch (button.id) {
         case "next":
-          if (this._pageNumber >= 2) {
+          if (this._pageNumber >= 3) {
             instructionPopupVisibility$.next(false);
             optionsPopupVisibility$.next(true);
             return;
