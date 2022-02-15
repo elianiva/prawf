@@ -1,7 +1,9 @@
 :host {
   position: fixed;
   inset: 0;
-  padding: 2rem;
+  display: grid;
+  grid-template-columns: 18rem 1fr;
+  max-height: 100%;
 }
 
 .container {
@@ -44,6 +46,7 @@
   color: var(--black);
   transform: translateY(6rem);
   transition: transform 0.2s ease-out;
+  text-align: center;
 }
 
 .question-item {
@@ -70,10 +73,10 @@
   outline: none;
   border-radius: 0.25rem;
   color: var(--black);
-  background-color: var(--light-grey);
+  background-color: var(--lighter-grey);
   cursor: pointer;
 }
 
 .numpad-button:hover {
-  filter: brightness(0.95);
+  background-color: var(--light-grey);
 }

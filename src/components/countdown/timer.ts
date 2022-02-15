@@ -20,23 +20,21 @@ export default class Timer extends HTMLElement {
     wrapper.innerHTML = `
       <style>
         :host {
-          position: fixed;
           display: block;
-          top: 2rem;
-          left: 1.5rem;
-          padding: 1rem;
           border-radius: 0.25rem;
-          box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.08);
           background-color: var(--white);
+          width: 100%;
+          padding: 1rem 0;
+          text-align: center;
         }
 
         .timer {
           font-family: var(--font-heading);
-          font-size: 2.5rem;
+          font-size: 4rem;
           font-weight: 400;
-          display: relative;
           height: 100%;
           width: 100%;
+          color: var(--black);
         }
       </style>
       <span class="timer">

@@ -22,7 +22,8 @@ export default class CountdownBar extends HTMLElement {
           left: 0;
           right: 0;
           height: 0.5rem;
-          background-color: var(--lighter-grey);
+          background-color: var(--lightest-grey);
+          z-index: 100;
         }
 
         .countdown {

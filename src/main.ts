@@ -6,8 +6,10 @@ import NotFound from "@/pages/notfound";
 import InstructionPopup from "@/components/popup/instruction";
 import OptionsPopup from "@/components/popup/options";
 import CountdownBar from "@/components/countdown/bar";
+import SidebarContainer from "@/components/sidebar/container";
+import History from "@/components/sidebar/history";
 import Timer from "@/components/countdown/timer";
-import { currentRoute$, Route } from "./store/route";
+import { currentRoute$, Route } from "@/store/route";
 
 customElements.define("p-homepage", Homepage);
 customElements.define("p-playpage", Playpage);
@@ -16,6 +18,8 @@ customElements.define("p-instruction-popup", InstructionPopup);
 customElements.define("p-options-popup", OptionsPopup);
 customElements.define("p-countdown-bar", CountdownBar);
 customElements.define("p-countdown-timer", Timer);
+customElements.define("p-sidebar", SidebarContainer);
+customElements.define("p-history", History);
 
 const outlet = document.querySelector("p-outlet");
 const outletShadowRoot = outlet!.attachShadow({ mode: "open" });

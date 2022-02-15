@@ -26,7 +26,7 @@ export default class Playpage extends HTMLElement {
         ${styles}
       </style>
       <p-countdown-bar></p-countdown-bar>
-      <p-countdown-timer></p-countdown-timer>
+      <p-sidebar></p-sidebar>
       <div class="container">
         <div class="question-wrapper">
           <div class="question-blocker"></div>
