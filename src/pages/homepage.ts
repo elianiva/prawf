@@ -25,7 +25,7 @@ export default class Homepage extends HTMLElement {
       <p-options-popup></p-options-popup>
       <div class="container">
         <h1 class="title">PRAWF</h1>
-        <p class="description">Pauli Test Simulation</p>
+        <p class="description">Pauli Test Simulation App</p>
         <div class="buttons" id="buttons">
           <button class="start-button" id="start-button">Start</button>
           <button class="leaderboard-button" id="leaderboard-button">

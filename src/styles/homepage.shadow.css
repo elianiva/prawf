@@ -14,8 +14,8 @@
 .title {
   font-family: var(--font-heading);
   font-size: 8rem;
-  letter-spacing: 0.05em;
-  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-weight: 800;
   color: var(--black);
   line-height: 1em;
   position: relative;
@@ -25,7 +25,8 @@
 .description {
   font-family: var(--font-body);
   font-size: 2rem;
-  font-weight: 400;
+  margin: 0;
+  font-weight: 500;
   color: var(--dark-grey);
 }
 
@@ -44,11 +45,12 @@
   font-family: var(--font-heading);
   border: none;
   outline: none;
-  padding: 0.5rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 0.25rem;
   cursor: pointer;
+  text-transform: uppercase;
 }
 
 .start-button {

@@ -31,3 +31,5 @@
   - [ ] Might want to rename fooEvent to fooSubscription since it's a subscription instead of a stream
   - [ ] Probably delete the isConnected guard since it seems useless
   - [ ] Make the amount of rounds configurable
+  - [ ] Create history table
+  - [ ] Tidy up imports

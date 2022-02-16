@@ -104,7 +104,9 @@ export default class ResultPage extends HTMLElement {
               </p>
             </div>
             <span class="result-label">Answers per round</span>
-            <span class="result-value">${(this._correct + this._incorrect) / 10}</span>
+            <span class="result-value">${
+              (this._correct + this._incorrect) / 10
+            }</span>
           </div>
         </div>
         <div class="chart-box">
@@ -119,6 +121,10 @@ export default class ResultPage extends HTMLElement {
             </div>
           </div>
           <p-chart></p-chart>
+        </div>
+        <div class="history-box">
+          <span class="history-title">History</span>
+          <p-history-table></p-history-table>
         </div>
       </div>
     `;

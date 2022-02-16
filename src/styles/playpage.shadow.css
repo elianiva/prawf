@@ -21,7 +21,7 @@
 .question-blocker::before {
   content: "";
   position: absolute;
-  top: -2.5rem;
+  top: -4rem;
   background-color: var(--dimmed-white);
   width: 100%;
   height: 12rem;
@@ -50,7 +50,7 @@
 }
 
 .question-item {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 8rem;
   font-weight: 600;
   margin: 0;
@@ -67,7 +67,7 @@
 }
 
 .numpad-button {
-  font-family: var(--font-heading);
+  font-family: var(--font-body);
   font-size: 3rem;
   border: none;
   outline: none;

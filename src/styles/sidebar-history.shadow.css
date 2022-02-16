@@ -16,12 +16,17 @@
 
 .item {
   display: grid;
-  grid-template-columns: 1rem 2fr 1rem 1rem 2fr;
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
+  grid-template-columns: 2rem 2fr 1rem 1rem 2fr;
+  align-items: center;
+  font-family: var(--font-body);
+  font-size: 1.5rem;
   padding: 0 1rem 1rem;
   border-radius: 0.25rem;
   color: var(--black);
+}
+
+.item-icon svg {
+  display: block;
 }
 
 /* we use 2 because nth-child(1) is the <style> tag */
@@ -37,7 +42,7 @@
 .item-duration::after {
   content: "ms";
   font-size: 1rem;
-  color: var(--light-grey);
+  color: var(--grey);
 }
 
 .item-question {

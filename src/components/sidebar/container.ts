@@ -15,7 +15,8 @@ export default class SidebarContainer extends HTMLElement {
       <style>
         :host {
           display: grid;
-          grid-template-rows: auto 3rem 1fr;
+          grid-template-rows: auto 4rem 1fr;
+          align-items: center;
           padding: 1rem;
           border-radius: 0.25rem;
           background-color: var(--white);
@@ -34,7 +35,9 @@ export default class SidebarContainer extends HTMLElement {
           align-items: center;
           justify-content: center;
           font-family: var(--font-heading);
+          font-weight: 600;
           font-size: 1.5rem;
+          line-height: 1em;
         }
       </style>
       <div class="top-box">

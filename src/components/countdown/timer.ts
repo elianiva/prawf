@@ -24,14 +24,14 @@ export default class Timer extends HTMLElement {
           border-radius: 0.25rem;
           background-color: var(--white);
           width: 100%;
-          padding: 1rem 0;
+          padding: 1rem 0 2rem;
           text-align: center;
         }
 
         .timer {
-          font-family: var(--font-heading);
+          font-family: var(--font-body);
           font-size: 4rem;
-          font-weight: 400;
+          font-weight: 500;
           height: 100%;
           width: 100%;
           color: var(--black);

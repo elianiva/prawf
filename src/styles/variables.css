@@ -1,8 +1,8 @@
 :root {
   --white: #ffffff;
   --dimmed-white: #f8fafc;
-  --dark-dimmed-white: #e2e8f0;
   --black: #1e293b;
+  --lightest-grey: #f1f5f9;
   --lighter-grey: #e2e8f0;
   --light-grey: #cbd5e1;
   --grey: #94a3b8;
@@ -12,6 +12,6 @@
   --red: #ef4444;
   --green: #10b981;
 
-  --font-heading: "Kanit", sans-serif;
-  --font-body: "Martel Sans", sans-serif;
+  --font-heading: "Raleway", sans-serif;
+  --font-body: "Barlow", sans-serif;
 }

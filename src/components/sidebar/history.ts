@@ -1,9 +1,9 @@
 import { gameHistory, gameHistory$ } from "@/store/gameState";
-import styles from "@/styles/history.shadow.css?inline";
+import styles from "@/styles/sidebar-history.shadow.css?inline";
 import checkmarkIcon from "@/icons/checkmark.svg?raw";
 import crossIcon from "@/icons/cross.svg?raw";
 
-export default class History extends HTMLElement {
+export default class SidebarHistory extends HTMLElement {
   private _shadowRoot: ShadowRoot;
 
   constructor() {

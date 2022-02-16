@@ -11,16 +11,16 @@ a {
 code {
   font-family: var(--font-body);
   border-radius: 0.125rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .secondary-button {
   font-family: var(--font-heading);
   border: none;
   outline: none;
-  padding: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 0.25rem;
   cursor: pointer;
 }
