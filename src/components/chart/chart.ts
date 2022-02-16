@@ -15,8 +15,8 @@ interface ChartData {
 
 export default class Chart extends HTMLElement {
   private _shadowRoot: ShadowRoot;
-  private _maxHeight: number;
-  private _blockHeight = 0;
+  private _maxSteps: number;
+  private _stepHeight = 0;
   private _points: Point[] = [];
   private _chartData: ChartData[];
   private readonly CHART_WIDTH = 912;
@@ -28,11 +28,12 @@ export default class Chart extends HTMLElement {
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
-    this._maxHeight = Object.values(resultsByRound).reduce((acc, curr) => {
-      const total = curr.correct + curr.incorrect;
-      return total > acc ? total : acc;
-    }, 0);
-    this._blockHeight = this.CHART_HEIGHT / this._maxHeight;
+    this._maxSteps =
+      Object.values(resultsByRound).reduce((acc, curr) => {
+        const total = curr.correct + curr.incorrect;
+        return total > acc ? total : acc;
+      }, 0) + 1;
+    this._stepHeight = this.CHART_HEIGHT / this._maxSteps;
     this._chartData = this._calculateChartData();
     this._points = this._chartData.reduce(
       (acc, { point }) => acc.concat([point]),
@@ -91,15 +92,15 @@ export default class Chart extends HTMLElement {
           stroke="var(--light-grey)"
           stroke-width="2"
         />
-        ${Array(this._maxHeight + 1)
+        ${Array(this._maxSteps)
           .fill(0)
           .map(
             (_, idx) => `
               <line
                 x1="0"
-                y1="${toFixedTwo(idx * this._blockHeight)}"
+                y1="${toFixedTwo(idx * this._stepHeight)}"
                 x2="${this.CHART_WIDTH}"
-                y2="${toFixedTwo(idx * this._blockHeight)}"
+                y2="${toFixedTwo(idx * this._stepHeight)}"
                 stroke="var(--lighter-grey)"
                 stroke-width="2"
               />`
@@ -172,8 +173,8 @@ export default class Chart extends HTMLElement {
   private _calculateChartData(): ChartData[] {
     return Object.values(resultsByRound).reduce((acc, result, idx, arr) => {
       const barWidth = this.CHART_WIDTH / arr.length - 16;
-      const incorrectHeight = result.incorrect * this._blockHeight;
-      const correctHeight = result.correct * this._blockHeight;
+      const incorrectHeight = result.incorrect * this._stepHeight;
+      const correctHeight = result.correct * this._stepHeight;
       const correctYPosition = this.CHART_HEIGHT - correctHeight;
       const incorrectYPosition =
         this.CHART_HEIGHT - (incorrectHeight + correctHeight);
@@ -189,8 +190,8 @@ export default class Chart extends HTMLElement {
         point: [
           toFixedTwo(xPosition + barWidth / 2),
           result.correct > result.incorrect
-            ? toFixedTwo(correctYPosition + 4)
-            : toFixedTwo(incorrectYPosition + 4)
+            ? toFixedTwo(correctYPosition)
+            : toFixedTwo(incorrectYPosition)
         ]
       });
     }, [] as ChartData[]);
