@@ -61,12 +61,7 @@ export default class Chart extends HTMLElement {
         }
 
         .bar {
-          filter: opacity(0.75);
           transition: filter 0.2s ease-out;
-        }
-
-        .bar:hover {
-          filter: opacity(1);
         }
       </style>
       <svg

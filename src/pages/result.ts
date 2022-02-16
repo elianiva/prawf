@@ -5,6 +5,7 @@ import styles from "@/styles/result.shadow.css?inline";
 import { toFixedTwo } from "@/utils/toFixedTwo";
 import barChartIcon from "@/icons/bar-chart.svg?raw";
 import lineChartIcon from "@/icons/line-chart.svg?raw";
+import questionIcon from "@/icons/question.svg?raw";
 import {
   fromEvent,
   groupBy,
@@ -50,35 +51,73 @@ export default class ResultPage extends HTMLElement {
         <h1 class="title">Your Test Result</h1>
         <div class="result-box">
           <div class="result-item">
+            <span class="result-question">${questionIcon}</span>
+            <div class="result-info">
+              <p>This is the total of your correct answers for every rounds combined.</p>
+            </div>
             <span class="result-label">Correct</span>
             <span class="result-value">${this._correct}</span>
           </div>
           <div class="result-item">
+            <span class="result-question">${questionIcon}</span>
+            <div class="result-info">
+              <p>This is the total of your incorrect answers for every rounds combined.</p>
+            </div>
             <span class="result-label">Incorrect</span>
             <span class="result-value">${this._incorrect}</span>
           </div>
           <div class="result-item">
+            <span class="result-question">${questionIcon}</span>
+            <div class="result-info">
+              <p>This is the ratio of your correct answers from the entire questions.</p>
+            </div>
             <span class="result-label">Ratio</span>
             <span class="result-value">${this._averageRatio * 100}%</span>
           </div>
           <div class="result-item">
+            <span class="result-question">${questionIcon}</span>
+            <div class="result-info">
+              <p>
+                Standard Deviation is how much your total answers deviate between each rounds.
+                Low number means you're consistent. High number means you're
+                inconsistent between rounds. The lower, the better.
+              </p>
+            </div>
             <span class="result-label">Standard Deviation</span>
             <span class="result-value">${this._standardDeviation}</span>
           </div>
           <div class="result-item">
+            <span class="result-question">${questionIcon}</span>
+            <div class="result-info">
+              <p>
+                This is how long you've been doing the test. This was chosen by you when starting the test.
+              </p>
+            </div>
             <span class="result-label">Duration</span>
             <span class="result-value">${chosenDuration}m</span>
           </div>
           <div class="result-item">
-            <span class="result-label">Average</span>
-            <span class="result-value">${this._averageRatio * 100}%</span>
+            <span class="result-question">${questionIcon}</span>
+            <div class="result-info">
+              <p>
+                This is the average of how many questions you answered for each round.
+              </p>
+            </div>
+            <span class="result-label">Answers per round</span>
+            <span class="result-value">${(this._correct + this._incorrect) / 10}</span>
           </div>
         </div>
         <div class="chart-box">
-          <span class="chart-label">Progression Overtime</span>
-          <button class="chart-toggle" id="chart-toggle">${
-            chartMode === "line" ? barChartIcon : lineChartIcon
-          }</button>
+          <div class="chart-header">
+            <button class="chart-toggle" id="chart-toggle">
+              ${chartMode === "line" ? barChartIcon : lineChartIcon}
+            </button>
+            <span class="chart-title">Progression Overtime</span>
+            <div class="chart-legend">
+              <span class="chart-legend-item correct"></span>
+              <span class="chart-legend-item incorrect"></span>
+            </div>
+          </div>
           <p-chart></p-chart>
         </div>
       </div>

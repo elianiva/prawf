@@ -7,10 +7,10 @@
 
 * TODO LIST
   - [ ] Use @fontsource instead of embeeding @import in css file
-  - [ ] Figure out scoring system
+  - [x] Figure out scoring system
     - [x] Concept
-    - [ ] Calculate consistency
-    - [ ] Calculate accuracy
+    - [x] Calculate consistency
+    - [x] Calculate accuracy
     - [x] Calculate correct answers
   - [x] Figure out how to make the animation
   - [x] Create countdown animation (it's like a reverse loading bar)
@@ -26,7 +26,8 @@
     - [x] Popup functionality
     - [x] Options chooser / dropdown
   - [ ] Add funfact-like page (result) with a fancy chart
-    - [ ] Create the chart
-    - [ ] Figure out icons to use
+    - [x] Create the chart
+    - [x] Figure out icons to use
   - [ ] Might want to rename fooEvent to fooSubscription since it's a subscription instead of a stream
   - [ ] Probably delete the isConnected guard since it seems useless
+  - [ ] Make the amount of rounds configurable
