@@ -1,21 +1,42 @@
+import { chartMode, chartMode$ } from "@/store/chart";
 import { GameHistory, gameHistory } from "@/store/gameState";
-import { resultsByRound$ } from "@/store/result";
+import { resultsByRound, resultsByRound$ } from "@/store/result";
 import styles from "@/styles/result.shadow.css?inline";
-import { groupBy, map, mergeMap, of, reduce } from "rxjs";
+import { toFixedTwo } from "@/utils/toFixedTwo";
+import {
+  fromEvent,
+  groupBy,
+  map,
+  mergeMap,
+  of,
+  reduce,
+  Subscription
+} from "rxjs";
 
 export default class ResultPage extends HTMLElement {
   private _shadowRoot: ShadowRoot;
+  private _clickEvent: Subscription | null = null;
   private _correct: number = 0;
   private _incorrect: number = 0;
   private _averageRatio: number = 0;
+  private _standardDeviation: number = 0;
+  private _totalAnswered: number = 0;
+  private _chartToggle: HTMLElement | null = null;
 
   constructor() {
     super();
     this._shadowRoot = this.attachShadow({ mode: "open" });
+
+    chartMode$.subscribe((mode) => {
+      if (this._chartToggle === null) return;
+      this._chartToggle.innerText =
+        (mode === "line" ? "bar" : "line") + " View";
+    });
   }
 
   private _render() {
     // clean previous content and remove previous event listener
+    this._clickEvent?.unsubscribe();
     this._shadowRoot.innerHTML = "";
 
     const wrapper = document.createElement("template");
@@ -41,12 +62,16 @@ export default class ResultPage extends HTMLElement {
         </div>
         <div class="chart-box">
           <span class="chart-label">Progression Overtime</span>
+          <button class="chart-toggle" id="chart-toggle">${
+            chartMode === "line" ? "bar" : "line"
+          } View</button>
           <p-chart></p-chart>
         </div>
       </div>
     `;
 
     this._shadowRoot.appendChild(wrapper.content.cloneNode(true));
+    this._attachEventListener();
   }
 
   private _mapToResult({
@@ -64,14 +89,30 @@ export default class ResultPage extends HTMLElement {
     return {
       correct: correct,
       incorrect: incorrect,
-      correctRatio: parseFloat((correct / (correct + incorrect)).toFixed(2)),
+      correctRatio: toFixedTwo(correct / (correct + incorrect)),
       round
     };
   }
 
-  public connectedCallback() {
-    if (!this.isConnected) return;
+  private _findStandardDeviation() {
+    const results = Object.values(resultsByRound);
+    const mean = this._totalAnswered / results.length;
 
+    // I could've done this without rxjs... but meh,
+    // it's fun to do it this way :p
+    of(...results)
+      .pipe(
+        map((r) => r.correct + r.incorrect),
+        map((x) => (x - mean) ** 2),
+        reduce((acc, curr) => acc + curr, 0),
+        map((sum) => toFixedTwo(sum / (results.length - 1)))
+      )
+      .subscribe((s) => {
+        this._standardDeviation = s;
+      });
+  }
+
+  private _findStatistics() {
     of(...gameHistory)
       .pipe(
         groupBy((x) => x.round),
@@ -95,10 +136,24 @@ export default class ResultPage extends HTMLElement {
           }
         });
       });
-    this._averageRatio = parseFloat(
-      (this._correct / (this._correct + this._incorrect)).toFixed(2)
+    this._totalAnswered = this._correct + this._incorrect;
+    this._averageRatio = toFixedTwo(
+      this._correct / (this._correct + this._incorrect)
     );
+  }
 
+  private _attachEventListener() {
+    this._chartToggle = this._shadowRoot.getElementById("chart-toggle");
+    fromEvent(this._chartToggle!, "click").subscribe(() => {
+      chartMode$.next(chartMode === "line" ? "bar" : "line");
+    });
+  }
+
+  public connectedCallback() {
+    if (!this.isConnected) return;
+
+    this._findStatistics();
+    this._findStandardDeviation();
     this._render();
   }
 }

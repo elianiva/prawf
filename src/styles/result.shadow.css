@@ -44,6 +44,7 @@
 }
 
 .chart-box {
+  position: relative;
   background-color: var(--white);
   border-radius: 0.25rem;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.05);
@@ -59,4 +60,18 @@
   text-align: center;
   display: block;
   margin-bottom: 2rem;
+}
+
+.chart-toggle {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem;
+  font-size: 1.125rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
 }
