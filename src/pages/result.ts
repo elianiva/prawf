@@ -1,8 +1,10 @@
 import { chartMode, chartMode$ } from "@/store/chart";
-import { GameHistory, gameHistory } from "@/store/gameState";
+import { chosenDuration, GameHistory, gameHistory } from "@/store/gameState";
 import { resultsByRound, resultsByRound$ } from "@/store/result";
 import styles from "@/styles/result.shadow.css?inline";
 import { toFixedTwo } from "@/utils/toFixedTwo";
+import barChartIcon from "@/icons/bar-chart.svg?raw";
+import lineChartIcon from "@/icons/line-chart.svg?raw";
 import {
   fromEvent,
   groupBy,
@@ -29,8 +31,8 @@ export default class ResultPage extends HTMLElement {
 
     chartMode$.subscribe((mode) => {
       if (this._chartToggle === null) return;
-      this._chartToggle.innerText =
-        (mode === "line" ? "bar" : "line") + " View";
+      this._chartToggle.innerHTML =
+        mode === "line" ? barChartIcon : lineChartIcon;
     });
   }
 
@@ -59,12 +61,24 @@ export default class ResultPage extends HTMLElement {
             <span class="result-label">Ratio</span>
             <span class="result-value">${this._averageRatio * 100}%</span>
           </div>
+          <div class="result-item">
+            <span class="result-label">Standard Deviation</span>
+            <span class="result-value">${this._standardDeviation}</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Duration</span>
+            <span class="result-value">${chosenDuration}m</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">Average</span>
+            <span class="result-value">${this._averageRatio * 100}%</span>
+          </div>
         </div>
         <div class="chart-box">
           <span class="chart-label">Progression Overtime</span>
           <button class="chart-toggle" id="chart-toggle">${
-            chartMode === "line" ? "bar" : "line"
-          } View</button>
+            chartMode === "line" ? barChartIcon : lineChartIcon
+          }</button>
           <p-chart></p-chart>
         </div>
       </div>

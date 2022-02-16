@@ -92,7 +92,7 @@ export default class Chart extends HTMLElement {
           stroke="var(--light-grey)"
           stroke-width="2"
         />
-        ${Array(this._maxSteps)
+        ${Array(this._maxSteps + 1)
           .fill(0)
           .map(
             (_, idx) => `
@@ -158,7 +158,7 @@ export default class Chart extends HTMLElement {
           )
           .join("")}
         ${chartMode === "line" ? this._renderLinePath() : ""}
-        ${this._points
+        ${chartMode === "line" && this._points
           .map(
             ([x, y]) =>
               `<circle cx="${x}" cy="${y}" r="6" fill="var(--red)"></circle>`
