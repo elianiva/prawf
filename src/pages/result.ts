@@ -90,7 +90,7 @@ export default class ResultPage extends HTMLElement {
             <span class="result-question">${questionIcon}</span>
             <div class="result-info">
               <p>
-                This is how long you've been doing the test. This was chosen by you when starting the test.
+                This is how long you've been doing the test. This was chosen before you start the test.
               </p>
             </div>
             <span class="result-label">Duration</span>

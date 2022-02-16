@@ -48,21 +48,25 @@
 }
 
 .result-question:hover ~ .result-info {
+  visibility: visible;
   opacity: 1;
 }
 
 .result-info {
   position: absolute;
+  top: 2rem;
   left: 3rem;
+  visibility: hidden;
   opacity: 0;
   font-family: var(--font-body);
   padding: 1rem;
   background-color: var(--black);
   color: var(--white);
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
   transition: opacity 0.1s ease-in;
   z-index: 10;
   min-width: 20rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
 }
 
 .result-info > p {
