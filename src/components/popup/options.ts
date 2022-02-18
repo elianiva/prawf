@@ -104,7 +104,6 @@ export default class OptionsPopup extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
     this._render();
   }
 

@@ -56,7 +56,6 @@ export default class Homepage extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
     this._render();
   }
 

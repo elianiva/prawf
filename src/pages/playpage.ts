@@ -138,7 +138,6 @@ export default class Playpage extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
     this._render();
 
     interval(((chosenDuration * 60) / 10) * 1000).subscribe(() => {

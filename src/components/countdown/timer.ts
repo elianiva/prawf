@@ -46,7 +46,6 @@ export default class Timer extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
     this._render();
 
     const finish$ = timer(chosenDuration * 60 * 1000);

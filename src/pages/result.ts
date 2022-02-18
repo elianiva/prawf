@@ -209,8 +209,6 @@ export default class ResultPage extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
-
     this._findStatistics();
     this._findStandardDeviation();
     this._render();

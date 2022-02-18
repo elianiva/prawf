@@ -42,7 +42,6 @@ export default class CountdownBar extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
     this._render();
 
     // start the animation on next frame

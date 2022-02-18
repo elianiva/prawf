@@ -51,7 +51,6 @@ export default class SidebarContainer extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
     this._render();
   }
 }

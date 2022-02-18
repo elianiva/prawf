@@ -173,7 +173,6 @@ export default class InstructionPopup extends HTMLElement {
   }
 
   public connectedCallback() {
-    if (!this.isConnected) return;
     this._render();
   }
 
