@@ -6,7 +6,7 @@
 @end
 
 * TODO LIST
-  - [ ] Use @fontsource instead of embeeding @import in css file
+  - [x] Use @fontsource instead of embeeding @import in css file
   - [x] Figure out scoring system
     - [x] Concept
     - [x] Calculate consistency
@@ -25,7 +25,7 @@
   - [x] Add dialog to choose time limit
     - [x] Popup functionality
     - [x] Options chooser / dropdown
-  - [ ] Add funfact-like page (result) with a fancy chart
+  - [x] Add funfact-like page (result) with a fancy chart
     - [x] Create the chart
     - [x] Figure out icons to use
   - [ ] Might want to rename fooEvent to fooSubscription since it's a subscription instead of a stream
