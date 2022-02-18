@@ -1,5 +1,6 @@
 import {
   chosenDuration,
+  chosenRounds,
   currentRound,
   currentRound$,
   gameHistory$
@@ -140,7 +141,7 @@ export default class Playpage extends HTMLElement {
   public connectedCallback() {
     this._render();
 
-    interval(((chosenDuration * 60) / 10) * 1000).subscribe(() => {
+    interval(((chosenDuration * 60) / chosenRounds) * 1000).subscribe(() => {
       currentRound$.next(currentRound + 1);
       console.log(currentRound);
     });

@@ -17,12 +17,12 @@
   color: var(--black);
 }
 
-.durations {
+.choices {
   display: flex;
   gap: 1.25rem;
 }
 
-.duration-item {
+.choice-item {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 1.25rem;
@@ -34,7 +34,7 @@
   background: none;
 }
 
-.duration-item.active {
+.choice-item.active {
   font-weight: 600;
   color: var(--black);
 }

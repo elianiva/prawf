@@ -36,8 +36,8 @@ export default class CountdownBar extends HTMLElement {
           ${
             /* prettier-ignore */
             gameHistory
-              .map(({ durationMs, questionNumber: [a, b], answer, round }, idx) => `
-                <tr>
+              .map(({ durationMs, questionNumber: [a, b], answer, round }, idx, history) => `
+                <tr class="${idx + 1 < history.length && history[idx + 1].round !== round ? 'bold-border' : 'thin-border'}">
                   <td>${idx + 1}</td>
                   <td>${durationMs}ms</td>
                   <td>${a} + ${b}</td>

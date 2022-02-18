@@ -3,7 +3,14 @@ import { optionsPopupVisibility$ } from "@/store/popup";
 import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/options-popup.shadow.css?inline";
 import { currentRoute$ } from "@/store/route";
-import { chosenDuration, chosenDuration$, DURATION } from "@/store/gameState";
+import {
+  chosenDuration,
+  chosenDuration$,
+  DURATION,
+  chosenRounds,
+  chosenRounds$,
+  ROUNDS
+} from "@/store/gameState";
 
 export default class OptionsPopup extends HTMLElement {
   private _shadowRoot: ShadowRoot;
@@ -43,16 +50,32 @@ export default class OptionsPopup extends HTMLElement {
           <div class="options">
             <label class="option-item">
               <span class="option-label">Duration</span>
-              <div class="durations">
+              <div class="choices">
                 ${DURATION.map(
                   (duration, idx) =>
                     `<button
-                        class="duration-item ${
+                        class="choice-item ${
                           chosenDuration === duration ? "active" : ""
                         }"
                         id=${"duration-" + idx}
                       >
                         ${duration}m
+                      </button>`
+                ).join("")}
+              </div>
+            </label>
+            <label class="option-item">
+              <span class="option-label">Rounds</span>
+              <div class="choices">
+                ${ROUNDS.map(
+                  (round, idx) =>
+                    `<button
+                        class="choice-item ${
+                          chosenRounds === round ? "active" : ""
+                        }"
+                        id=${"rounds-" + idx}
+                      >
+                        ${round}
                       </button>`
                 ).join("")}
               </div>
@@ -92,6 +115,10 @@ export default class OptionsPopup extends HTMLElement {
         case button.id.startsWith("duration-"):
           const durationIdx = parseInt(button.id.split("-")[1]);
           chosenDuration$.next(DURATION[durationIdx]);
+          break;
+        case button.id.startsWith("rounds-"):
+          const roundsIdx = parseInt(button.id.split("-")[1]);
+          chosenRounds$.next(ROUNDS[roundsIdx]);
           break;
         default: /* noop */
       }
