@@ -156,7 +156,7 @@ export default class Chart extends HTMLElement {
         ${chartMode === "line" && this._points
           .map(
             ([x, y]) =>
-              `<circle cx="${x}" cy="${y}" r="6" fill="var(--red)"></circle>`
+              `<circle cx="${x}" cy="${y}" r="6" fill="var(--sky)"></circle>`
           )
           .join("")}
       </svg>
@@ -238,10 +238,11 @@ export default class Chart extends HTMLElement {
         })
         .join(" ")}"
       stroke-width="2"
-      stroke="var(--black)"
+      stroke="var(--sky)"
       stroke-linecap="round"
       stroke-linejoin="round"
-      fill="transparent"
+      fill="var(--sky)"
+      fill-opacity="0.1"
     />`;
   }
 
