@@ -1,5 +1,8 @@
 import { fromEvent, Subscription } from "rxjs";
-import { instructionPopupVisibility$ } from "@/store/popup";
+import {
+  instructionPopupVisibility$,
+  optionsPopupVisibility$
+} from "@/store/popup";
 import styles from "@/styles/homepage.shadow.css?inline";
 
 export default class Homepage extends HTMLElement {
@@ -28,9 +31,7 @@ export default class Homepage extends HTMLElement {
         <p class="description">Pauli Test Simulation App</p>
         <div class="buttons" id="buttons">
           <button class="start-button" id="start-button">Start</button>
-          <button class="leaderboard-button" id="leaderboard-button">
-            Leaderboard
-          </button>
+          <button class="instruction-button" id="instruction-button">Instructions</button>
         </div>
       </div>
     `;
@@ -50,6 +51,10 @@ export default class Homepage extends HTMLElement {
       if (button === null) return;
 
       if (button.id === "start-button") {
+        optionsPopupVisibility$.next(true);
+      }
+
+      if (button.id === "instruction-button") {
         instructionPopupVisibility$.next(true);
       }
     });

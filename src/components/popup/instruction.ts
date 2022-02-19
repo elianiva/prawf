@@ -1,8 +1,5 @@
 import { fromEvent, Subscription } from "rxjs";
-import {
-  instructionPopupVisibility$,
-  optionsPopupVisibility$
-} from "@/store/popup";
+import { instructionPopupVisibility$ } from "@/store/popup";
 import baseStyles from "@/styles/base-popup.shadow.css?inline";
 import styles from "@/styles/instruction-popup.shadow.css?inline";
 
@@ -126,7 +123,7 @@ export default class InstructionPopup extends HTMLElement {
             Previous
           </button>
           <button id="next" class="primary-button">
-            Next
+            ${this._pageNumber === 3 ? "Finish" : "Next"}
           </button>
         </div>
       </div>
@@ -150,7 +147,6 @@ export default class InstructionPopup extends HTMLElement {
         case "next":
           if (this._pageNumber >= 3) {
             instructionPopupVisibility$.next(false);
-            optionsPopupVisibility$.next(true);
             return;
           }
           this._pageNumber++;

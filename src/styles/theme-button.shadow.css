@@ -16,14 +16,13 @@
 }
 
 .circle {
-  /* background-color: var(--light-grey); */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .inner-circle {
-  background-color: var(--black);
+  background-color: var(--grey);
   border-radius: 50%;
   width: 1.75rem;
   height: 1.75rem;
@@ -48,14 +47,14 @@
   border-radius: 50%;
   transition: all 0.3s ease;
   /* prettier-ignore */
-  box-shadow: 0 -1rem 0 var(--black),   /* north */
-              0.75rem -0.75rem 0 var(--black),  /* north east */
-              1rem 0 0 var(--black),    /* east */
-              0.75rem 0.75rem 0 var(--black),   /* south east */
-              0 1rem 0 var(--black),    /* south */
-              -0.75rem 0.75rem 0 var(--black),  /* south west */
-              -1rem 0 0 var(--black),   /* west */
-              -0.75rem -0.75rem 0 var(--black); /* north west */
+  box-shadow: 0 -1rem 0 var(--grey),   /* north */
+              0.75rem -0.75rem 0 var(--grey),  /* north east */
+              1rem 0 0 var(--grey),    /* east */
+              0.75rem 0.75rem 0 var(--grey),   /* south east */
+              0 1rem 0 var(--grey),    /* south */
+              -0.75rem 0.75rem 0 var(--grey),  /* south west */
+              -1rem 0 0 var(--grey),   /* west */
+              -0.75rem -0.75rem 0 var(--grey); /* north west */
 }
 
 .circle.light .inner-circle {
