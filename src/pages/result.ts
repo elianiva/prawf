@@ -15,6 +15,7 @@ import {
   reduce,
   Subscription
 } from "rxjs";
+import { currentRoute$ } from "@/store/route";
 
 export default class ResultPage extends HTMLElement {
   private _shadowRoot: ShadowRoot;
@@ -49,7 +50,7 @@ export default class ResultPage extends HTMLElement {
       </style>
       <div class="container">
         <h1 class="title">Your Test Result</h1>
-        <a class="back-button" href="/">Go back home</a>
+        <a class="back-button" href="/" id="back">Back to home</a>
         <div class="result-box">
           <div class="result-item">
             <span class="result-question">${questionIcon}</span>
@@ -206,6 +207,12 @@ export default class ResultPage extends HTMLElement {
     this._chartToggle = this._shadowRoot.getElementById("chart-toggle");
     fromEvent(this._chartToggle!, "click").subscribe(() => {
       chartMode$.next(chartMode === "line" ? "bar" : "line");
+    });
+
+    const backButton = this._shadowRoot.getElementById("back");
+    fromEvent(backButton!, "click").subscribe((e) => {
+      e.preventDefault();
+      currentRoute$.next("/");
     });
   }
 
