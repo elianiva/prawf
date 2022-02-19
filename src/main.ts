@@ -21,7 +21,9 @@ import SidebarHistory from "@/components/sidebar/history";
 import Timer from "@/components/countdown/timer";
 import Chart from "@/components/chart/chart";
 import HistoryTable from "@/components/history/table";
+import ThemeButton from "@/components/theme/button";
 import { currentRoute$, Route } from "@/store/route";
+import { currentTheme$ } from "./store/theme";
 
 customElements.define("p-homepage", Homepage);
 customElements.define("p-playpage", Playpage);
@@ -35,6 +37,7 @@ customElements.define("p-sidebar", SidebarContainer);
 customElements.define("p-history", SidebarHistory);
 customElements.define("p-chart", Chart);
 customElements.define("p-history-table", HistoryTable);
+customElements.define("p-theme-button", ThemeButton);
 
 const outlet = document.querySelector("p-outlet");
 const outletShadowRoot = outlet!.attachShadow({ mode: "open" });
@@ -71,3 +74,8 @@ window.onload = () => {
   const route = window.location.pathname;
   currentRoute$.next(route);
 };
+
+// dark mode stuff
+currentTheme$.subscribe(({ current }) => {
+  document.documentElement.setAttribute("data-theme", current);
+});

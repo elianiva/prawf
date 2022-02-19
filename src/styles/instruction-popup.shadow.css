@@ -32,6 +32,6 @@ code {
 
 .secondary-button:hover {
   cursor: pointer;
-  box-shadow: 0 0 0 0.125rem var(--dimmed-white),
+  box-shadow: 0 0 0 0.125rem var(--white),
               0 0 0 0.25rem var(--light-grey);
 }

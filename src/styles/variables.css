@@ -14,4 +14,25 @@
 
   --font-heading: "Raleway", sans-serif;
   --font-body: "Barlow", sans-serif;
+
+}
+
+[data-theme="dark"]:root {
+  --white: #334155;
+  --dimmed-white: #1e293b;
+  --black: #f8fafc;
+
+  --lightest-grey: #334155;
+  --lighter-grey: #475569;
+  --light-grey: #64748b;
+  --grey: #cbd5e1;
+  --dark-grey: #e2e8f0;
+
+  --sky: #38bdf8;
+  --dark-sky: #7dd3fc;
+  --red: #f87171;
+  --green: #34d399;
+
+  --font-heading: "Raleway", sans-serif;
+  --font-body: "Barlow", sans-serif;
 }

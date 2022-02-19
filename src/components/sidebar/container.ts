@@ -38,6 +38,7 @@ export default class SidebarContainer extends HTMLElement {
           font-weight: 600;
           font-size: 1.5rem;
           line-height: 1em;
+          color: var(--black);
         }
       </style>
       <div class="top-box">

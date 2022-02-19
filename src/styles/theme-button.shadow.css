@@ -1,0 +1,85 @@
+:host {
+  position: fixed;
+  display: block;
+  top: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  outline: none;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.circle {
+  /* background-color: var(--light-grey); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inner-circle {
+  background-color: var(--black);
+  border-radius: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+  transition: transform 0.3s ease;
+}
+
+.inner-circle::before {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--dimmed-white);
+  transition: scale 0.3s ease;
+}
+
+.circle::after {
+  content: "";
+  position: absolute;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  /* prettier-ignore */
+  box-shadow: 0 -1rem 0 var(--black),   /* north */
+              0.75rem -0.75rem 0 var(--black),  /* north east */
+              1rem 0 0 var(--black),    /* east */
+              0.75rem 0.75rem 0 var(--black),   /* south east */
+              0 1rem 0 var(--black),    /* south */
+              -0.75rem 0.75rem 0 var(--black),  /* south west */
+              -1rem 0 0 var(--black),   /* west */
+              -0.75rem -0.75rem 0 var(--black); /* north west */
+}
+
+.circle.light .inner-circle {
+  transform: scale(1);
+}
+
+.circle.dark .inner-circle {
+  transform: scale(0.5);
+}
+
+.circle.light .inner-circle::before {
+  top: -1rem;
+  right: -1rem;
+}
+
+.circle.dark .inner-circle::before {
+  top: -2rem;
+  right: -2rem;
+}
+
+.circle.light::after {
+  transform: scale(0);
+}
+
+.circle.dark::after {
+  transform: scale(1);
+}
