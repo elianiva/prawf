@@ -17,9 +17,9 @@
   - [x] Show time left
   - [_] Figure out how to make the interval faster (like, how fast should it be)
   - [x] Generate numbers for the test (should we populate it first? should we generate it every click event?)
-  - [ ] Create the backend to store the score (probably gonna use restana and sqlite for the db)
+  - [_] Create the backend to store the score (probably gonna use restana and sqlite for the db)
   - [x] Create homepage
-  - [ ] Create leaderboard page
+  - [_] Create leaderboard page
   - [x] Figure out routing system
   - [x] Create notfound page
   - [x] Add dialog to choose time limit
@@ -28,7 +28,7 @@
   - [x] Add funfact-like page (result) with a fancy chart
     - [x] Create the chart
     - [x] Figure out icons to use
-  - [ ] Might want to rename fooEvent to fooSubscription since it's a subscription instead of a stream
+  - [_] Might want to rename fooEvent to fooSubscription since it's a subscription instead of a stream
   - [x] Probably delete the isConnected guard since it seems useless
   - [x] Make the amount of rounds configurable
   - [x] Create history table
