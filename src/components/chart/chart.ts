@@ -20,9 +20,9 @@ export default class Chart extends HTMLElement {
   private _points: Point[] = [];
   private _chartData: ChartData[];
   private readonly CHART_WIDTH = 912;
-  private readonly CHART_HEIGHT = 320;
+  private readonly CHART_HEIGHT = 360;
   private readonly CHART_GAP = 16;
-  private readonly Y_OFFSET = 64;
+  private readonly Y_OFFSET = 80;
   private readonly SMOOTHING_RATIO = 0.2;
 
   constructor() {
@@ -152,13 +152,11 @@ export default class Chart extends HTMLElement {
               </text>`
           )
           .join("")}
-        ${chartMode === "line" ? this._renderLinePath() : ""}
-        ${chartMode === "line" && this._points
-          .map(
-            ([x, y]) =>
-              `<circle cx="${x}" cy="${y}" r="6" fill="var(--sky)"></circle>`
-          )
-          .join("")}
+        ${
+          chartMode === "line"
+            ? this._renderLines() + this._renderPoints()
+            : ""
+        }
       </svg>
     `;
 
@@ -192,6 +190,15 @@ export default class Chart extends HTMLElement {
     }, [] as ChartData[]);
   }
 
+  private _renderPoints() {
+    return this._points
+      .map(
+        ([x, y]) =>
+          `<circle cx="${x}" cy="${y}" r="6" fill="var(--sky)"></circle>`
+      )
+      .join("");
+  }
+
   private _renderBar(
     x: number,
     y: number,
@@ -208,7 +215,7 @@ export default class Chart extends HTMLElement {
       fill="var(--${colour})"></rect>`;
   }
 
-  private _renderLinePath() {
+  private _renderLines() {
     return `<path
       class="line"
       d="${[

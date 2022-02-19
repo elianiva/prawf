@@ -1,5 +1,5 @@
 import { gameHistory } from "@/store/gameState";
-import styles from "@/styles/table.shadow.css?inline";
+import styles from "@/styles/history-table.shadow.css?inline";
 
 export default class CountdownBar extends HTMLElement {
   private _shadowRoot: ShadowRoot;
