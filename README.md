@@ -31,7 +31,7 @@ Here are some screenshots if you don't want to try it yourself
 
 ![Home](./.github/assets/home.png)
 ![Options](./.github/assets/options.png)
-![Instructions](./.github/assets/instructions.png)
+![Instructions](./.github/assets/instruction.png)
 ![Play](./.github/assets/play.png)
 ![Result-1](./.github/assets/result-1.png)
 ![Result-2](./.github/assets/result-2.png)
