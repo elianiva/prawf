@@ -141,9 +141,14 @@ export default class Playpage extends HTMLElement {
   public connectedCallback() {
     this._render();
 
-    interval(((chosenDuration * 60) / chosenRounds) * 1000).subscribe(() => {
+    const interval$ = interval(
+      ((chosenDuration * 60) / chosenRounds) * 1000
+    ).subscribe(() => {
       currentRound$.next(currentRound + 1);
-      console.log(currentRound);
+
+      if (currentRound === chosenRounds) {
+        interval$.unsubscribe();
+      }
     });
   }
 
