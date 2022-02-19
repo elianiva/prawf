@@ -1,5 +1,4 @@
 import { Subject } from "rxjs";
-import FAKE from "@/FAKE.json";
 
 export const DURATION = [1, 10, 15, 30, 60, 120] as const;
 export type ValidDuration = typeof DURATION[number];
@@ -25,6 +24,10 @@ export type GameHistory = {
   durationMs: number;
   round: number;
 };
+
+// debugging purpose only
+// import FAKE from "@/FAKE.json";
+// export const gameHistory: GameHistory[] = [...(FAKE) as GameHistory[]];
 
 export const gameHistory: GameHistory[] = [];
 export const gameHistory$ = new Subject<GameHistory>();
