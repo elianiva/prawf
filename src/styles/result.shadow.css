@@ -8,9 +8,23 @@
   color: var(--black);
   font-family: var(--font-heading);
   font-size: 3rem;
-  margin: 0 0 2rem;
+  margin-bottom: 0.5rem;
   text-align: center;
   font-weight: 600;
+}
+
+.back-button {
+  font-family: var(--font-body);
+  display: block;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--grey);
+  text-decoration: none;
+}
+
+.back-button:hover {
+  color: var(--dark-sky);
+  text-decoration: underline;
 }
 
 .result-box {

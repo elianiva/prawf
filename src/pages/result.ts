@@ -7,11 +7,11 @@ import barChartIcon from "@/icons/bar-chart.svg?raw";
 import lineChartIcon from "@/icons/line-chart.svg?raw";
 import questionIcon from "@/icons/question.svg?raw";
 import {
+  from,
   fromEvent,
   groupBy,
   map,
   mergeMap,
-  of,
   reduce,
   Subscription
 } from "rxjs";
@@ -49,6 +49,7 @@ export default class ResultPage extends HTMLElement {
       </style>
       <div class="container">
         <h1 class="title">Your Test Result</h1>
+        <a class="back-button" href="/">Go back home</a>
         <div class="result-box">
           <div class="result-item">
             <span class="result-question">${questionIcon}</span>
@@ -159,7 +160,7 @@ export default class ResultPage extends HTMLElement {
 
     // I could've done this without rxjs... but meh,
     // it's fun to do it this way :p
-    of(...results)
+    from(results)
       .pipe(
         map((r) => r.correct + r.incorrect),
         map((x) => (x - mean) ** 2),
@@ -172,7 +173,7 @@ export default class ResultPage extends HTMLElement {
   }
 
   private _findStatistics() {
-    of(...gameHistory)
+    from(gameHistory)
       .pipe(
         groupBy((x) => x.round),
         mergeMap((group$) =>

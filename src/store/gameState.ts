@@ -28,7 +28,6 @@ export type GameHistory = {
   round: number;
 };
 
-export const gameHistory: GameHistory[] = [...(FAKE as GameHistory[])];
-// export const gameHistory: GameHistory[] = [];
+export const gameHistory: GameHistory[] = [];
 export const gameHistory$ = new Subject<GameHistory>();
 gameHistory$.subscribe((history) => gameHistory.push(history));
